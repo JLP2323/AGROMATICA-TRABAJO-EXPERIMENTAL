@@ -1,0 +1,217 @@
+digraph UML_Cultivos {
+	rankdir=TB
+	node [fillcolor=lightyellow shape=record style=filled]
+	CooperativaAgricola [label="{CooperativaAgricola|
+    idCooperativa : int\l
+    nombre : String\l
+    direccion : String\l
+    telefono : String\l|
+    registrarCooperativa()\l
+    actualizarDatos()\l
+    eliminarCooperativa()\l
+    obtenerCooperativa()\l
+    }"]
+	Finca [label="{Finca|
+    idFinca : int\l
+    nombre : String\l
+    extensionHectareas : double\l
+    tipoSuelo : String\l|
+    registrarFinca()\l
+    actualizarFinca()\l
+    calcularExtension()\l
+    obtenerFinca()\l
+    }"]
+	UbicacionGPS [label="{UbicacionGPS|
+    idUbicacion : int\l
+    latitud : double\l
+    longitud : double\l|
+    registrarUbicacion()\l
+    actualizarUbicacion()\l
+    obtenerUbicacion()\l
+    }"]
+	LoteCultivo [label="{LoteCultivo|
+    numeroLote : int\l
+    tipoCultivo : String\l
+    fechaSiembra : Date\l
+    fechaEstimadaCosecha : Date\l
+    estadoActual : String\l|
+    registrarLote()\l
+    actualizarEstado()\l
+    asignarCultivo()\l
+    calcularEdad()\l
+    obtenerLote()\l
+    }"]
+	Cosecha [label="{Cosecha|
+    idCosecha : int\l
+    fecha : Date\l
+    cantidadKg : double\l
+    calidad : String\l|
+    registrarCosecha()\l
+    calcularRendimiento()\l
+    obtenerCosechas()\l
+    }"]
+	Agricultor [label="{Agricultor|
+    cedula : String\l
+    nombreCompleto : String\l
+    telefono : String\l
+    correoElectronico : String\l|
+    registrarAgricultor()\l
+    actualizarDatos()\l
+    obtenerAgricultor()\l
+    }"]
+	AplicacionInsumo [label="{AplicacionInsumo|
+    idAplicacion : int\l
+    fechaAplicacion : Date\l
+    cantidadUtilizada : double\l|
+    registrarAplicacion()\l
+    calcularTotalAplicado()\l
+    obtenerAplicaciones()\l
+    }"]
+	InsumoAgricola [label="{InsumoAgricola|
+    codigo : String\l
+    nombre : String\l
+    categoria : String\l
+    unidadMedida : String\l
+    stockDisponible : double\l|
+    registrarInsumo()\l
+    actualizarStock()\l
+    obtenerInsumo()\l
+    }"]
+	Semilla [label="{Semilla|
+    variedad : String\l
+    poderGerminativo : double\l|
+    calcularGerminacion()\l
+    }"]
+	Fertilizante [label="{Fertilizante|
+    composicion : String\l
+    tipoAplicacion : String\l|
+    recomendarDosis()\l
+    }"]
+	Pesticida [label="{Pesticida|
+    ingredienteActivo : String\l
+    nivelToxicidad : String\l|
+    verificarToxicidad()\l
+    }"]
+	Semilla -> InsumoAgricola [arrowhead=empty]
+	Fertilizante -> InsumoAgricola [arrowhead=empty]
+	Pesticida -> InsumoAgricola [arrowhead=empty]
+	CooperativaAgricola -> Finca [label="administra 1..*"]
+	Finca -> UbicacionGPS [label="posee 1"]
+	Finca -> LoteCultivo [label="contiene 1..*"]
+	LoteCultivo -> Cosecha [label="genera 0..*"]
+	LoteCultivo -> AplicacionInsumo [label="registra 0..*"]
+	Agricultor -> Cosecha [label="responsable de"]
+	AplicacionInsumo -> InsumoAgricola [label=utiliza]
+	Usuario [label="{Usuario|
+    idUsuario : int\l
+    nombreUsuario : String\l
+    contrasena : String\l
+    estado : String\l|
+    iniciarSesion()\l
+    cerrarSesion()\l
+    cambiarContrasena()\l
+    }"]
+	Rol [label="{Rol|
+    idRol : int\l
+    nombreRol : String\l
+    descripcion : String\l|
+    asignarPermisos()\l
+    obtenerRol()\l
+    }"]
+	Usuario -> Rol [label="1..*"]
+	ReporteProduccion [label="{ReporteProduccion|
+    idReporte : int\l
+    fechaInicio : Date\l
+    fechaFin : Date\l
+    tipoReporte : String\l|
+    generarReporte()\l
+    exportarPDF()\l
+    exportarExcel()\l
+    }"]
+	ReporteInsumos [label="{ReporteInsumos|
+    idReporte : int\l
+    fechaInicio : Date\l
+    fechaFin : Date\l
+    tipoReporte : String\l|
+    generarReporte()\l
+    exportarPDF()\l
+    exportarExcel()\l
+    }"]
+	Sensor [label="{Sensor|
+    idSensor : int\l
+    tipo : String\l
+    ubicacion : String\l
+    estado : String\l|
+    registrarSensor()\l
+    obtenerLecturas()\l
+    }"]
+	MonitoreoClimatico [label="{MonitoreoClimatico|
+    temperatura : double\l
+    humedad : double\l
+    phSuelo : double\l|
+    registrarDato()\l
+    obtenerDatos()\l
+    }"]
+	Alerta [label="{Alerta|
+    idAlerta : int\l
+    tipo : String\l
+    mensaje : String\l
+    estado : String\l|
+    generarAlerta()\l
+    marcarComoLeida()\l
+    }"]
+	Sensor -> MonitoreoClimatico
+	MonitoreoClimatico -> Alerta
+	Inventario [label="{Inventario|
+    idInventario : int\l
+    fecha : Date\l
+    tipoMovimiento : String\l
+    cantidad : double\l|
+    registrarMovimiento()\l
+    consultarStock()\l
+    }"]
+	Proveedor [label="{Proveedor|
+    idProveedor : int\l
+    nombre : String\l
+    telefono : String\l
+    direccion : String\l|
+    registrarProveedor()\l
+    obtenerProveedor()\l
+    }"]
+	MovimientoInventario [label="{MovimientoInventario|
+    idMovimiento : int\l
+    fecha : Date\l
+    tipo : String\l
+    cantidad : double\l|
+    registrarMovimiento()\l
+    obtenerMovimientos()\l
+    }"]
+	Proveedor -> MovimientoInventario
+	Inventario -> MovimientoInventario
+	PlanSiembra [label="{PlanSiembra|
+    idPlan : int\l
+    fechaInicio : Date\l
+    fechaFin : Date\l
+    cultivo : String\l|
+    registrarPlan()\l
+    actualizarPlan()\l
+    }"]
+	SeguimientoCultivo [label="{SeguimientoCultivo|
+    idSeguimiento : int\l
+    fecha : Date\l
+    actividad : String\l
+    observacion : String\l|
+    registrarSeguimiento()\l
+    obtenerSeguimientos()\l
+    }"]
+	RendimientoCultivo [label="{RendimientoCultivo|
+    idRendimiento : int\l
+    lote : String\l
+    rendimiento : double\l
+    fecha : Date\l|
+    calcularRendimiento()\l
+    obtenerRendimiento()\l
+    }"]
+	PlanSiembra -> SeguimientoCultivo
+	SeguimientoCultivo -> RendimientoCultivo
+}

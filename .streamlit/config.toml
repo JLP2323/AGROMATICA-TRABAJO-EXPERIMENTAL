@@ -1,0 +1,22 @@
+# ============================================================
+# AGROMATICA — Configuración de Streamlit
+# ============================================================
+
+[theme]
+base = "dark"
+primaryColor = "#2D9B6F"
+backgroundColor = "#0F1923"
+secondaryBackgroundColor = "#1E2D3D"
+textColor = "#E2E8F0"
+font = "sans serif"
+
+[server]
+headless = true
+runOnSave = true
+port = 8501
+
+[browser]
+gatherUsageStats = false
+
+[logger]
+level = "info"

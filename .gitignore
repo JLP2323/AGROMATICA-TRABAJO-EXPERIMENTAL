@@ -1,1 +1,33 @@
-.venv
+# Entorno virtual
+.venv/
+venv/
+env/
+
+# Variables de entorno (¡NUNCA subir credenciales!)
+.env
+.env.local
+.env.*.local
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.egg-info/
+dist/
+build/
+
+# Streamlit
+.streamlit/secrets.toml
+
+# IDEs
+.idea/
+.vscode/
+*.iml
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
